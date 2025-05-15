@@ -15,16 +15,22 @@
   </head>
   <body>
     <div class="container">
+        <header>
+            {% include "nav_menu_include.html" %}
+        </header>
         {% comment %} Тут будет контекнт! {% endcomment %}
         {% block content %}
         {% comment %} Данные будут вставлятся сюда! {% endcomment %}
         {% endblock %}
     </div>
+
+    {% block scripts %}
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script src="{% static 'js/test.js' %}"></script>
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  <script src="{% static 'js/test.js' %}"></script>
+    {% endblock scripts %}
   </body>
 </html>
