@@ -1,15 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .data import *
+from django.contrib.auth.decorators import login_required
 
 
 def landing(request):
-    return HttpResponse(
-        """
-<h1>Barbershop</h1>
-<p>Приветсвую путник. Ты находишься на сайте барбершопа. Здесь ты можешь записаться на стрижку, узнать цены и многое другое.</p>
-"""
-    )
+    context = {
+        "title": "Главная - Барбершоп Арбуз",
+        "services": services, # Из data.py
+        "masters": masters,   # Из data.py
+        "years_on_market": 50
+    }
+    return render(request, "core/landing.html", context)
 
 
 def master_detail(request, master_id):
@@ -106,12 +108,12 @@ def test(request):
     }
     return render(request, "test.html", context)
 
-
+@login_required
 def orders_list(request):
     context = {"orders": orders, "title": "Список заказов"}
     return render(request, "core/orders_list.html", context)
 
-
+@login_required
 def order_detail(request, order_id: int):
     try:
         order = [o for o in orders if o["id"] == order_id][0]
